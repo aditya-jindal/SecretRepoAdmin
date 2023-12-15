@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { getScores } from "./services/getScores";
 import { useState } from "react";
+import * as XLSX from "xlsx";
 
 function App() {
   const [scores, setScores] = useState([]);
@@ -28,11 +29,24 @@ function App() {
   function handleClick() {
     setRefresh((refresh) => refresh + 1);
   }
+  const handleGenerate = function () {
+    const wb = XLSX.utils.book_new();
+    const ws = XLSX.utils.json_to_sheet(
+      scores.map((score) => ({
+        ...score,
+        submitted_on: formatDateAndAddTime(score.submitted_on),
+      }))
+    );
+    XLSX.utils.book_append_sheet(wb, ws, "sheet1");
+    XLSX.writeFile(wb, "MathFest2023_Scores.xlsx");
+  };
+
   return (
     <div>
       <div className="header">
-        <h1>MathFest 2023 Demo Scores Table</h1>
+        <h1>MathFest 2023 Scores Table</h1>
         <button onClick={handleClick}>Refresh</button>
+        <button onClick={handleGenerate}>Export to Excel</button>
       </div>
       <table className="score-table">
         <thead>

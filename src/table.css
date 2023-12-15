@@ -17,3 +17,7 @@
     display: inline;
     margin-right: 2rem;
   }
+
+  button{
+    margin-right: .3rem;
+  }
