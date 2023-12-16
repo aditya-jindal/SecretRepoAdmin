@@ -53,8 +53,10 @@ function App() {
           <tr>
             <th>ID</th>
             <th>Submitted On</th>
+            <th>College</th>
             <th>Name</th>
             <th>EmailID</th>
+            <th>Time Taken</th>
             <th>Score</th>
           </tr>
         </thead>
@@ -63,8 +65,10 @@ function App() {
             <tr key={index}>
               <td>{score.id}</td>
               <td>{formatDateAndAddTime(score.submitted_on)}</td>
+              <td>{score.college}</td>
               <td>{score.name}</td>
               <td>{score.email}</td>
+              <td>{score.timeTaken}</td>
               <td>{score.score}</td>
             </tr>
           ))}
